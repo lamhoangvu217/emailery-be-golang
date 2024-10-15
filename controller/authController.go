@@ -51,9 +51,7 @@ func Register(c *fiber.Ctx) error {
 		})
 	}
 	user := models.User{
-		FullName: data["full_name"].(string),
 		Email:    strings.TrimSpace(data["email"].(string)),
-		Phone:    data["phone"].(string),
 		Username: data["username"].(string),
 		UserType: "Free",
 	}
