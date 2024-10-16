@@ -110,3 +110,19 @@ func Login(c *fiber.Ctx) error {
 		"access_token": cookie.Value,
 	})
 }
+func Logout(c *fiber.Ctx) error {
+	// Create a cookie with the same name as the JWT cookie but set its expiry time in the past
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour), // Set expiry to the past to delete the cookie
+		HTTPOnly: true,
+	}
+
+	// Set the cookie to the response
+	c.Cookie(&cookie)
+
+	return c.JSON(fiber.Map{
+		"message": "Logout successful",
+	})
+}
