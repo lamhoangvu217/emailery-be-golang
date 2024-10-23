@@ -83,6 +83,6 @@ func UpdateUserInfo(c *fiber.Ctx) error {
 	}
 	return c.Status(200).JSON(fiber.Map{
 		"message": "User information updated successfully!",
-		"user":    data,
+		"user":    user,
 	})
 }

@@ -54,6 +54,7 @@ func Register(c *fiber.Ctx) error {
 		Email:    strings.TrimSpace(data["email"].(string)),
 		Username: data["username"].(string),
 		UserType: "Free",
+		Avatar:   "",
 	}
 	user.SetPassword(data["password"].(string))
 	err := database.DB.Create(&user).Error

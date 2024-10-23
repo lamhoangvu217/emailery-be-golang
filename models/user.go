@@ -8,6 +8,7 @@ type User struct {
 	Password []byte `json:"-"`
 	Username string `json:"username"`
 	UserType string `json:"user_type"`
+	Avatar   string `json:"avatar"`
 }
 
 func (user *User) SetPassword(password string) error {
