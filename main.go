@@ -1,12 +1,12 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"log"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/joho/godotenv"
 	"github.com/lamhoangvu217/emailery-be-golang/database"
 	"github.com/lamhoangvu217/emailery-be-golang/routes"
 )
@@ -18,7 +18,13 @@ func main() {
 		if err != nil {
 			log.Fatal("Error loading .env.local file")
 		}
+	} else {
+		err := godotenv.Load(".env.production")
+		if err != nil {
+			log.Fatal("Error loading .env.production file")
+		}
 	}
+
 	port := os.Getenv("PORT")
 	app := fiber.New()
 
