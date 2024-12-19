@@ -13,11 +13,10 @@ import (
 var DB *gorm.DB
 
 func Connect() {
-	if os.Getenv("ENV") != "production" {
-		err := godotenv.Load(".env.local")
-		if err != nil {
-			log.Fatal("Error loading .env.local file")
-		}
+	log.Println("env", os.Getenv("ENV"))
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("Error loading .env file")
 	}
 	dsn := os.Getenv("DSN")
 	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
@@ -29,5 +28,7 @@ func Connect() {
 	DB = database
 	database.AutoMigrate(
 		&models.User{},
+		&models.Email{},
+		&models.Message{},
 	)
 }
